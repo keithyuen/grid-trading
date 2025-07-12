@@ -129,36 +129,52 @@ logs/
 ```
 
 ---
-# === OPTIONAL: Schedule restart daily and on crash ===
-# PM2 is a process manager that can keep your Python script running,
-# automatically restart on crash, and allow scheduled restarts with logging.
-# Step 1: Install Node.js (if not already installed)
-# This also installs npm, which is required for pm2
+## 🔄 Process Management with PM2 (Optional)
+
+PM2 is a process manager that can keep your Python script running, automatically restart on crash, and allow scheduled restarts with logging.
+
+### 1. Install PM2
+```bash
+# Install Node.js (if not already installed)
 brew install node
 
-# Step 2: Install PM2 globally using npm
+# Install PM2 globally using npm
 npm install -g pm2
+```
 
-# === Start the Python app with PM2 ===
+### 2. Start the Bot with PM2
+```bash
 # Make sure to specify the full path to your virtual environment's Python
 pm2 start /Users/keithyuen/python/grid-trading/main.py \
   --name gridtrader \
-  --interpreter /Users/keithyuen/python/grid-trading/venv/bin/python
+  --interpreter /Users/keithyuen/python/grid-trading/venv/bin/python \
+  --cwd /Users/keithyuen/python/grid-trading
+```
 
-# === Schedule a daily restart at 9 PM Eastern Time (9 AM Singapore Time) ===
+### 3. Schedule Daily Restart
+```bash
+# Restart daily at 9 PM Eastern Time (9 AM Singapore Time)
 pm2 restart gridtrader --cron "0 9 * * *"
 
-# === Save the PM2 process list for reboot persistence (optional) ===
+# Save the PM2 process list for reboot persistence (optional)
 pm2 save
+```
 
-# === View logs ===
+### 4. Monitor and Manage
+```bash
+# Monitor dashboard
+pm2 monit
+
+# View logs
 pm2 logs gridtrader
 
-# === Common PM2 Commands ===
+# Common PM2 commands
 pm2 list            # Show running processes
 pm2 restart gridtrader
 pm2 stop gridtrader
 pm2 delete gridtrader
+```
+
 ---
 
 ## 🛠️ Coming Soon (Optional Enhancements)
