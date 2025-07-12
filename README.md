@@ -132,7 +132,12 @@ logs/
 # === OPTIONAL: Schedule restart daily and on crash ===
 # PM2 is a process manager that can keep your Python script running,
 # automatically restart on crash, and allow scheduled restarts with logging.
-brew install pm2
+# Step 1: Install Node.js (if not already installed)
+# This also installs npm, which is required for pm2
+brew install node
+
+# Step 2: Install PM2 globally using npm
+npm install -g pm2
 
 # === Start the Python app with PM2 ===
 # Make sure to specify the full path to your virtual environment's Python
