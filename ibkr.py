@@ -60,7 +60,13 @@ class IBKRClient:
         from datetime import datetime, time as dtime
         import pytz
         eastern = pytz.timezone("US/Eastern")
-        now = datetime.now(eastern).time()
+        now = datetime.now(eastern)
+        
+        # Check if it's weekend (Saturday = 5, Sunday = 6)
+        if now.weekday() >= 5:  # Saturday or Sunday
+            return 'closed'
+        
+        now_time = now.time()
         # Customizable session boundaries
         pre_market_open = dtime(4, 5)
         pre_market_close = dtime(7, 30)
@@ -70,13 +76,13 @@ class IBKRClient:
         after_hours_close = dtime(19, 45)
         overnight_open = dtime(20, 15)
         overnight_close = dtime(3, 45)
-        if pre_market_open <= now < pre_market_close:
+        if pre_market_open <= now_time < pre_market_close:
             return 'pre-market'
-        elif regular_open <= now < regular_close:
+        elif regular_open <= now_time < regular_close:
             return 'regular'
-        elif after_hours_open <= now < after_hours_close:
+        elif after_hours_open <= now_time < after_hours_close:
             return 'after-hours'
-        elif (now >= overnight_open) or (now < overnight_close):
+        elif (now_time >= overnight_open) or (now_time < overnight_close):
             return 'overnight'
         else:
             return 'closed'
