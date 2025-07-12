@@ -1,0 +1,9 @@
+# grid-trading/requirements.txt
+
+ib_async==2.0.1
+streamlit==1.35.0
+pandas
+pyyaml
+nest_asyncio
+pytest
+pytz

@@ -55,8 +55,8 @@ Thumbs.db
 
 # IBKR
 *.xml
-*.txt
 *.csv
+# Note: requirements.txt is intentionally tracked, so we don't ignore *.txt
 
 # Config files with sensitive data (optional)
 # config.yaml 
