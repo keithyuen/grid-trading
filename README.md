@@ -153,8 +153,8 @@ pm2 start /Users/keithyuen/python/grid-trading/main.py \
 
 ### 3. Schedule Daily Restart
 ```bash
-# Restart daily at 9 PM Eastern Time (9 AM Singapore Time)
-pm2 restart gridtrader --cron "0 9 * * *"
+# Restart daily at 9 PM Eastern Time (9:15 AM Singapore Time)
+pm2 restart gridtrader --cron "15 21 * * *"
 
 # Save the PM2 process list for reboot persistence (optional)
 pm2 save
