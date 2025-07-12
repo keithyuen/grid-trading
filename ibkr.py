@@ -173,7 +173,9 @@ class IBKRClient:
             # Try to get historical data as fallback
             try:
                 from datetime import datetime, timedelta
-                end_time = datetime.now().strftime('%Y%m%d %H:%M:%S')
+                import pytz
+                eastern = pytz.timezone("US/Eastern")
+                end_time = datetime.now(eastern).strftime('%Y%m%d %H:%M:%S US/Eastern')
                 bars = self.ib.reqHistoricalData(
                     contract, endDateTime=end_time, durationStr='1 D',
                     barSizeSetting='1 min', whatToShow='TRADES', useRTH=False

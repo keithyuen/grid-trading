@@ -91,12 +91,12 @@ def main():
                     print(f"📊 Using last known price from database: ${current_price}")
                 else:
                     # Use fallback price from config
-                    current_price = config.get('fallback_price', 80.00)
+                    current_price = config.get('fallback_price', 83.00)
                     logger.info(f"Using fallback price from config: ${current_price}")
                     print(f"📊 Using fallback price from config: ${current_price}")
             except Exception as db_error:
                 logger.error(f"Database error: {db_error}")
-                current_price = config.get('fallback_price', 80.00)  # Fallback price from config
+                current_price = config.get('fallback_price', 83.00)  # Fallback price from config
                 logger.info(f"Using fallback price from config: ${current_price}")
                 print(f"📊 Using fallback price from config: ${current_price}")
         
@@ -163,7 +163,7 @@ def main():
                         current_price = fallback_price
                         logger.info(f"Using fallback price from database: ${current_price}")
                     else:
-                        current_price = config.get('fallback_price', 80.00)  # Fallback price from config
+                        current_price = config.get('fallback_price', 83.00)  # Fallback price from config
                         logger.info(f"Using fallback price from config: ${current_price}")
 
                 # Recalculate available cash, lot size, and interval dynamically
