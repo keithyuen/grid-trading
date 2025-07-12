@@ -22,3 +22,6 @@ profit_pct: 0.015         # 1.5% profit target per trade
 
 # Trading symbol
 symbol: "TQQQ"
+
+# Fallback price when market data is unavailable
+fallback_price: 83.00

@@ -90,15 +90,15 @@ def main():
                     logger.info(f"Using last known price from database: ${current_price}")
                     print(f"📊 Using last known price from database: ${current_price}")
                 else:
-                    # Use a reasonable fallback price
-                    current_price = 85.20  # Approximate TQQQ price
-                    logger.info(f"Using fallback price: ${current_price}")
-                    print(f"📊 Using fallback price: ${current_price}")
+                    # Use fallback price from config
+                    current_price = config.get('fallback_price', 80.00)
+                    logger.info(f"Using fallback price from config: ${current_price}")
+                    print(f"📊 Using fallback price from config: ${current_price}")
             except Exception as db_error:
                 logger.error(f"Database error: {db_error}")
-                current_price = 84.20  # Fallback price
-                logger.info(f"Using fallback price: ${current_price}")
-                print(f"📊 Using fallback price: ${current_price}")
+                current_price = config.get('fallback_price', 80.00)  # Fallback price from config
+                logger.info(f"Using fallback price from config: ${current_price}")
+                print(f"📊 Using fallback price from config: ${current_price}")
         
         # Calculate available cash (budget + realized PnL - committed cash)
         print("💵 Calculating available cash...")
@@ -163,8 +163,8 @@ def main():
                         current_price = fallback_price
                         logger.info(f"Using fallback price from database: ${current_price}")
                     else:
-                        current_price = 85.20  # Default fallback
-                        logger.info(f"Using default fallback price: ${current_price}")
+                        current_price = config.get('fallback_price', 80.00)  # Fallback price from config
+                        logger.info(f"Using fallback price from config: ${current_price}")
 
                 # Recalculate available cash, lot size, and interval dynamically
                 used_cash = db.get_committed_cash(symbol)
