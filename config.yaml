@@ -1,0 +1,24 @@
+# If you're using Live IB Gateway, the default port is usually 4001.
+# If it's Paper Trading, the default is 4002.
+# IBKR Gateway or TWS port
+tws_port: 4002
+
+# Client ID used to identify this bot session
+client_id: 2
+
+# Paper trading mode (set to false for live trading)
+paper_trading: true
+
+# Fixed budget used for this strategy (not account balance)
+strategy_budget: 50000  # USD
+
+# Base lot size for first allocation (adjusted by formula)
+base_lot: 100
+
+# Constants for calculation
+crash_pct: 0.87           # Historical max drawdown
+range_fraction: 0.565     # Based on drawdown model
+profit_pct: 0.015         # 1.5% profit target per trade
+
+# Trading symbol
+symbol: "TQQQ"
