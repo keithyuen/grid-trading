@@ -50,14 +50,12 @@ def calculate_lot_size_and_interval(cash, current_price, crash_pct=0.87, range_f
             raise ValueError("Invalid denominator in lot size calculation")
         
         lot_size = numerator / denominator
-        # alternative: hard code the lot size instead
-        # lot_size = 15
         
         # Check for NaN or infinite values
         if math.isnan(lot_size) or math.isinf(lot_size):
             raise ValueError("Lot size calculation resulted in NaN or infinite value")
         
-        lot_size = floor(lot_size)
+        lot_size = math.ceil(lot_size)
         if lot_size < 1:
             lot_size = 1
         

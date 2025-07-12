@@ -13,7 +13,7 @@ paper_trading: true
 strategy_budget: 50000  # USD
 
 # Base lot size for first allocation (adjusted by formula)
-base_lot: 100
+base_lot: 30
 
 # Constants for calculation
 crash_pct: 0.87           # Historical max drawdown

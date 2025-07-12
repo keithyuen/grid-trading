@@ -138,6 +138,18 @@ def main():
             )
             
             logger.info(f"Calculated lot size: {lot_size} shares")
+            # Validate lot size against minimum and maximum bounds
+            min_lot = config.get('base_lot', 30)
+            max_lot = min(1000, int(available_cash * 0.1 / current_price))  # Max 10% of cash per order
+            
+            if lot_size < min_lot:
+                logger.warning(f"Calculated lot size ({lot_size}) is below minimum ({min_lot}). Using minimum lot size.")
+                lot_size = min_lot
+            elif lot_size > max_lot:
+                logger.warning(f"Calculated lot size ({lot_size}) exceeds maximum ({max_lot}). Using maximum lot size.")
+                lot_size = max_lot
+            
+            logger.info(f"Final lot size: {lot_size} shares")
             logger.info(f"Calculated interval: ${interval:.2f}")
             
         except Exception as e:
@@ -176,6 +188,18 @@ def main():
                     crash_pct=config['crash_pct'],
                     range_fraction=config['range_fraction']
                 )
+                
+                # Validate lot size in main loop as well
+                min_lot = config.get('base_lot', 30)
+                max_lot = min(1000, int(available_cash * 0.1 / current_price))  # Max 10% of cash per order
+                
+                if lot_size < min_lot:
+                    logger.warning(f"Calculated lot size ({lot_size}) is below minimum ({min_lot}). Using minimum lot size.")
+                    lot_size = min_lot
+                elif lot_size > max_lot:
+                    logger.warning(f"Calculated lot size ({lot_size}) exceeds maximum ({max_lot}). Using maximum lot size.")
+                    lot_size = max_lot
+                
                 # guardrail to prevent negative cash
                 if available_cash < 2000:
                     logger.warning(f"Available cash (${available_cash:.2f}) is low. No new orders will be placed.")
