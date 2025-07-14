@@ -200,6 +200,9 @@ def main():
                     logger.warning(f"Calculated lot size ({lot_size}) exceeds maximum ({max_lot}). Using maximum lot size.")
                     lot_size = max_lot
                 
+                logger.info(f"Re-calculated lot size: {lot_size} shares")
+                logger.info(f"Re-calculated interval: ${interval:.2f}")
+                
                 # guardrail to prevent negative cash
                 if available_cash < 2000:
                     logger.warning(f"Available cash (${available_cash:.2f}) is low. No new orders will be placed.")
