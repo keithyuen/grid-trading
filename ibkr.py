@@ -263,7 +263,8 @@ class IBKRClient:
         # Create the parent buy order
         parent_order = LimitOrder('BUY', quantity, buy_price, tif=tif)
         # not needed as outsideRth can be placed during regular hours too: if period in ['pre-market', 'after-hours']:
-        parent_order.outsideRth = True
+        if period in ['pre-market', 'after-hours']:
+            order.outsideRth = True  # Allow order to execute outside regular hours
         if period == 'overnight':
             parent_order.exchange = 'OVERNIGHT'
         parent_order.transmit = False
@@ -271,7 +272,8 @@ class IBKRClient:
         # Create the attached sell order (profit-taking)
         take_profit_order = LimitOrder('SELL', quantity, sell_price, tif=tif)
         # not needed as outsideRth can be placed during regular hours too: if period in ['pre-market', 'after-hours']:
-        take_profit_order.outsideRth = True
+        if period in ['pre-market', 'after-hours']:
+            order.outsideRth = True  # Allow order to execute outside regular hours
         if period == 'overnight':
             take_profit_order.exchange = 'OVERNIGHT'
         take_profit_order.transmit = True
