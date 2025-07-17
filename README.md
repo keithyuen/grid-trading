@@ -1,6 +1,6 @@
 # Grid Trading Bot with IBKR and `ib_async`
 
-This project implements a grid trading bot using the Interactive Brokers API via [`ib_async`](https://github.com/ib-api-reloaded/ib_async). It supports a fully automated TQQQ-like strategy with configurable assets, persistent tracking, and a live Streamlit dashboard.
+This project implements a grid trading bot using the Interactive Brokers API via [`ib_async`](https://github.com/ib-api-reloaded/ib_async). It supports a fully automated grid trading strategy with configurable assets, persistent tracking, and a live Streamlit dashboard.
 
 ---
 
