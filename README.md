@@ -4,7 +4,7 @@ This project implements a grid trading bot using the Interactive Brokers API via
 
 ---
 
-## ✅ Features
+## Features
 - Lot size & interval calculation based on historical drawdown logic
 - GTC grid limit orders for consistent buy-low, sell-high execution
 - Persistent SQLite tracking of trades, PnL, and open orders
@@ -12,7 +12,7 @@ This project implements a grid trading bot using the Interactive Brokers API via
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the Project
 ```bash
@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🧠 IB Gateway Setup (Paper or Live)
+## IB Gateway Setup (Paper or Live)
 
 ### A. Download & Launch
 - Download IB Gateway: https://www.interactivebrokers.com/en/index.php?f=16457
@@ -42,15 +42,15 @@ pip install -r requirements.txt
 ### B. Configure API Access
 Go to **Configure > Settings > API > Settings** and ensure:
 
-- ✅ **Socket port: 4002** — this is your API port for **paper trading**  
+- **Socket port: 4002** — this is your API port for **paper trading**  
   (Use **4001** for **live trading**)
-- ✅ **Download open orders on connection**
-- ✅ **Include market data in API log file**
-- ✅ **Trusted IPs**: add `127.0.0.1`
+- **Download open orders on connection**
+- **Include market data in API log file**
+- **Trusted IPs**: add `127.0.0.1`
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 Edit `config.yaml`:
 ```yaml
 paper_trading: true
@@ -70,7 +70,7 @@ symbol: "TQQQ"
 
 ---
 
-## 🧪 Run a Connection Test
+## Run a Connection Test
 To verify your IB Gateway/API setup before placing trades:
 ```bash
 python test_connection.py
@@ -82,7 +82,7 @@ This will:
 
 ---
 
-## ▶️ Run the Bot
+## Run the Bot
 ```bash
 source venv/bin/activate #if not done yet
 python main.py
@@ -95,25 +95,25 @@ The bot will:
 
 ---
 
-## 📊 Launch Dashboard
+## Launch Dashboard
 ```bash
 streamlit run streamlit_dashboard.py
 ```
 
 Dashboard includes:
-- 🔁 Open Buy/Sell Orders
-- ✅ Trade History
-- 💰 Realized PnL summary
+- Open Buy/Sell Orders
+- Trade History
+- Realized PnL summary
 
 ---
 
-## 🔁 Restarting the Bot
+## Restarting the Bot
 The strategy is stateful:
 - Reuses previous trade history
 - Recalculates interval from `trade_logs.db`
 - Ensures no duplicate trades or orders
 
-## 📝 Logging
+## Logging
 Logs are automatically managed with daily rotation:
 - **Location**: `logs/` folder
 - **Format**: `trading-YYYY-MM-DD.log`
@@ -129,7 +129,7 @@ logs/
 ```
 
 ---
-## 🔄 Process Management with PM2 (Optional)
+## Process Management with PM2 (Optional)
 
 PM2 is a process manager that can keep your Python script running, automatically restart on crash, and allow scheduled restarts with logging.
 
@@ -153,8 +153,8 @@ pm2 start /Users/keithyuen/python/grid-trading/main.py \
 
 ### 3. Schedule Daily Restart
 ```bash
-# Restart daily at 9 PM Eastern Time (9:15 AM Singapore Time)
-pm2 restart gridtrader --cron "15 21 * * *"
+# Restart daily at 9 PM Eastern Time (9:15 AM Singapore Time Monday to Friday)
+pm2 restart gridtrader --cron "15 21 * * 1-5"
 
 # Save the PM2 process list for reboot persistence (optional)
 pm2 save
@@ -177,14 +177,7 @@ pm2 delete gridtrader
 
 ---
 
-## 🛠️ Coming Soon (Optional Enhancements)
-- Multi-symbol support with per-symbol configs
-- Slack/email notifications
-- Backtesting module
-
----
-
-## 📄 License
+## License
 MIT License
 
 ---
